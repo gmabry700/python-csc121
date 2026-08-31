@@ -93,8 +93,8 @@ Each `module_N_readme.md` follows the same pattern:
 2. **Labs** — work through the labs listed in that module's readme, following the linked CS50P short.
 3. **Turn-in** — run the tests locally, and once you're happy with the result:
    ```bash
-   git add *
-   git commit -m "module 0 labs"
+   git add .
+   git commit -m "module_0 labs"
    git push
    ```
 4. **CI** — open a pull request on GitHub for that branch. This triggers a GitHub Actions run that executes the tests and reports your score directly on the PR.
