@@ -4,7 +4,6 @@ def dashboard():
       📚  YOUR LIBRARY
     40 '='
     """
-    # your code here
     print('=' * 40)
     print('  📚  YOUR LIBRARY')
     print('=' * 40)
@@ -13,7 +12,6 @@ def dashboard():
 def estimate_reading_time(pages):
     """Return estimated reading time in hours, assuming 40 pages/hour.
     This number should be rounded to 1 decimal place"""
-    # your code here
     return round(float(pages/40), 1)
 
 
@@ -22,7 +20,6 @@ def add_book():
     This function takes in user input for title, author, and page count.
     Create a variable called hours that calls the function estimate_reading_time
     """
-    # your code here
     title = input("Book title: ").title().strip()    # get user input in title case for "Book title: "
     author = input("Author: ").title().strip()       # get user input for "Author: "
     pages = int(input("Page count: "))               # get user input as an int for "Page count: "
