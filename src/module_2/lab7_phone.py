@@ -1,1 +1,7 @@
-# Refer to this module's readme
+'''String Slicing'''
+def main():
+    phone = "617-495-1000"
+    print(phone[-4:])
+
+
+main()
