@@ -30,9 +30,26 @@ def add_book():
     print(f"  '{title}' by {author} -- approx. {hours} hours to read")
 
 
+def show_menu():
+    print(f'''
+    What would you like to do?
+    
+    1) View books
+    2) Add a book
+    
+    q) Quit
+    
+    ''')
+    option = input("> ").strip().lower()
+    return option
+
 def main():
     dashboard()
     add_book()
+    option = ''
+    while option != 'q':
+        dashboard()
+        option = show_menu()
 
 
 if __name__ == "__main__":
