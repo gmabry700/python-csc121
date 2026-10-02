@@ -63,3 +63,7 @@ git push -u origin module_4
 
 #### CI
 Open a GitHub Pull Request. If you are on branch `module_4` this should trigger a GitHub action and populate your score.
+
+#### Style
+PEP 8 
+[peps.python.org/pep-008](PEP 8)
