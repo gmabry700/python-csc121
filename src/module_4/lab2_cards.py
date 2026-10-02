@@ -2,6 +2,7 @@ import random
 
 cards = ["jack", "queen", "king"]
 
+
 def main():
     random.seed(0)
     # print(random.choice(cards))

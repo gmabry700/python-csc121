@@ -1,5 +1,6 @@
 import requests
 
+
 def get_artists(query, limit):
     try:
         response = requests.get(

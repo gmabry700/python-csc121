@@ -1,5 +1,6 @@
 import requests
 
+
 def main():
     artwork = input("Artwork: ")
     artworks = get_artworks(query=artwork, limit=3)
@@ -11,7 +12,7 @@ def get_artworks(query, limit):
     try:
         response = requests.get(
             "https://api.artic.edu/api/v1/agents/search",
-        {
+            {
                 "q": query,
                 "limit": limit
             }

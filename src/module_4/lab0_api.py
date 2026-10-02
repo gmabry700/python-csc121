@@ -8,8 +8,8 @@ def main():
 
     try:
         response = requests.get(
-        "https://api.artic.edu/api/v1/artworks/search",
-    {
+            "https://api.artic.edu/api/v1/artworks/search",
+            {
                 "limit": 3,
                 "q": artist
             }
@@ -21,7 +21,7 @@ def main():
 
     content = response.json()
     # print(content['data'])
-    for artwork in content['data']:
+    for artwork in content["data"]:
         print(f"* {artwork['title']}")
 
 
