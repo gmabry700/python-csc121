@@ -63,3 +63,23 @@ git push -u origin module_4
 
 #### CI
 Open a GitHub Pull Request. If you are on branch `module_4` this should trigger a GitHub action and populate your score.
+
+#### Style
+[PEP8](peps.python.org/pep-008)
+
+[pylint](https://pylint.readthedocs.io/en/latest/)
+```bash
+    pip install pylint
+    pylint mydir
+```
+
+[pycodestyle](pycodestyle.pycqa.org)
+
+
+[Black](black.readthedocs.io)
+    
+```bash
+    pip install black
+    python -m black {source_file_or_directory}...
+```
+    

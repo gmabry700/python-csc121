@@ -1,5 +1,6 @@
 import requests
 
+
 def get_artwork(query, limit):
     try:
         response = requests.get(
