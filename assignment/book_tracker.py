@@ -1,3 +1,6 @@
+import csv
+
+
 def dashboard():
     """Prints
     40 '='
@@ -16,12 +19,26 @@ def estimate_reading_time(pages):
 
 
 def add_book(library=[]):
+    """
+    Get the boook details from the user, add the book to library,
+    save it to boooks.csv, and prrint a summary.
+    """
     book = {}
     book["title"] = input("Book title: ").title().strip()    # get user input in title case for "Book title: "
     book["author"] = input("Author: ").title().strip()       # get user input for "Author: "
     book["pages"] = int(input("Page count: "))               # get user input as an int for "Page count: "
     book["hours"] = estimate_reading_time(book["pages"])     # call estimate_reading_time by passing in pages
     library.append(book)
+
+    #TODO: write the book to books.csv
+    # open "books.csv" in append mode using with ... as file:
+    with open("books.csv", "a") as library:
+        reader = csv.DictReader(library)
+        writer = csv.DictWriter(library, fieldnames=["title", "author", "pages", "hours"])
+    # create a variable called writer that holds a csv.DictWriter
+    #     pass in the file and fieldnames=["title", "author", "pages", "hours"]
+    # use writer.writerow() to write the book dictionary to the file
+        writer.writerow(book)
 
     print("\nBook added:\n")
     print(f"""  '{book["title"]}' by {book["author"]} -- approx. {book["hours"]} hours to read""")
@@ -36,6 +53,25 @@ def view_books(library=[]):
         for num in range(len(library)):
             book = library[num]
             print(f"""  {num+1}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)""")
+
+
+def load_books():
+    """
+    Read every book saved in books.csv and return them as a list of dictionaries
+    """
+    library = []
+    # open "books.csv" using with ... as file:
+    # create a variable called reader that holds csv.DictReader(file)
+    # for each row in reader:
+    # create a dictionary called book:
+    #     "title"  -> row["title"]
+    #     "author" -> row["author"]
+    #     "pages"  -> row["pages"] converted with int()
+    #     "hours"  -> row["hours"] converted with float()
+    # append book to library
+
+    return library
+
 
 
 def show_menu():
