@@ -20,8 +20,8 @@ def estimate_reading_time(pages):
 
 def add_book(library=[]):
     """
-    Get the boook details from the user, add the book to library,
-    save it to boooks.csv, and prrint a summary.
+    Get the book details from the user, add the book to library,
+    save it to books.csv, and print a summary.
     """
     book = {}
     book["title"] = input("Book title: ").title().strip()    # get user input in title case for "Book title: "
@@ -30,14 +30,9 @@ def add_book(library=[]):
     book["hours"] = estimate_reading_time(book["pages"])     # call estimate_reading_time by passing in pages
     library.append(book)
 
-    #TODO: write the book to books.csv
-    # open "books.csv" in append mode using with ... as file:
+    # write the book to books.csv
     with open("books.csv", "a") as library:
-        reader = csv.DictReader(library)
         writer = csv.DictWriter(library, fieldnames=["title", "author", "pages", "hours"])
-    # create a variable called writer that holds a csv.DictWriter
-    #     pass in the file and fieldnames=["title", "author", "pages", "hours"]
-    # use writer.writerow() to write the book dictionary to the file
         writer.writerow(book)
 
     print("\nBook added:\n")
@@ -55,8 +50,6 @@ def view_books(library=[]):
         print("Your library is empty. Add a book first!")
     else:
         for num in range(len(library)):
-            book = library[num]
-            # print(f"""  {num+1}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)""")
             print(format_book(library[num], num+1))
 
 def load_books():
@@ -66,17 +59,14 @@ def load_books():
     library = []
     with open("books.csv", "r") as file:
         reader = csv.DictReader(file)
-    # open "books.csv" using with ... as file:
-    # create a variable called reader that holds csv.DictReader(file)
-    # for each row in reader:
+
         for row in reader:
-            book = {"title": row["title"], "author": row["author"], "pages": int(row["pages"]), "hours": float(row["hours"])}
-    # create a dictionary called book:
-    #     "title"  -> row["title"]
-    #     "author" -> row["author"]
-    #     "pages"  -> row["pages"] converted with int()
-    #     "hours"  -> row["hours"] converted with float()
-    # append book to library
+            book = {
+                "title": row["title"],
+                "author": row["author"],
+                "pages": int(row["pages"]),
+                "hours": float(row["hours"])
+            }
             library.append(book)
     return library
 
