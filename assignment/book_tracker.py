@@ -46,30 +46,38 @@ def add_book(library=[]):
     return book
 
 
+def format_book(book, num):
+    return f"""{num}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)"""
+
+
 def view_books(library=[]):
     if len(library) == 0:
         print("Your library is empty. Add a book first!")
     else:
         for num in range(len(library)):
             book = library[num]
-            print(f"""  {num+1}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)""")
-
+            # print(f"""  {num+1}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)""")
+            print(format_book(library[num], num+1))
 
 def load_books():
     """
     Read every book saved in books.csv and return them as a list of dictionaries
     """
     library = []
+    with open("books.csv", "r") as file:
+        reader = csv.DictReader(file)
     # open "books.csv" using with ... as file:
     # create a variable called reader that holds csv.DictReader(file)
     # for each row in reader:
+        for row in reader:
+            book = {"title": row["title"], "author": row["author"], "pages": int(row["pages"]), "hours": float(row["hours"])}
     # create a dictionary called book:
     #     "title"  -> row["title"]
     #     "author" -> row["author"]
     #     "pages"  -> row["pages"] converted with int()
     #     "hours"  -> row["hours"] converted with float()
     # append book to library
-
+            library.append(book)
     return library
 
 
@@ -89,7 +97,7 @@ def show_menu():
 
 
 def main():
-    library = []
+    library = load_books()
     option = ''
     dashboard()
     while option != 'q':
