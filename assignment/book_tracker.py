@@ -1,3 +1,6 @@
+import csv
+
+
 def dashboard():
     """Prints
     40 '='
@@ -16,6 +19,10 @@ def estimate_reading_time(pages):
 
 
 def add_book(library=[]):
+    """
+    Get the book details from the user, add the book to library,
+    save it to books.csv, and print a summary.
+    """
     book = {}
     book["title"] = input("Book title: ").title().strip()    # get user input in title case for "Book title: "
     book["author"] = input("Author: ").title().strip()       # get user input for "Author: "
@@ -23,10 +30,19 @@ def add_book(library=[]):
     book["hours"] = estimate_reading_time(book["pages"])     # call estimate_reading_time by passing in pages
     library.append(book)
 
+    # write the book to books.csv
+    with open("books.csv", "a") as library:
+        writer = csv.DictWriter(library, fieldnames=["title", "author", "pages", "hours"])
+        writer.writerow(book)
+
     print("\nBook added:\n")
     print(f"""  '{book["title"]}' by {book["author"]} -- approx. {book["hours"]} hours to read""")
 
     return book
+
+
+def format_book(book, num):
+    return f"""{num}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)"""
 
 
 def view_books(library=[]):
@@ -34,8 +50,26 @@ def view_books(library=[]):
         print("Your library is empty. Add a book first!")
     else:
         for num in range(len(library)):
-            book = library[num]
-            print(f"""  {num+1}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)""")
+            print(format_book(library[num], num+1))
+
+def load_books():
+    """
+    Read every book saved in books.csv and return them as a list of dictionaries
+    """
+    library = []
+    with open("books.csv", "r") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            book = {
+                "title": row["title"],
+                "author": row["author"],
+                "pages": int(row["pages"]),
+                "hours": float(row["hours"])
+            }
+            library.append(book)
+    return library
+
 
 
 def show_menu():
@@ -53,7 +87,7 @@ def show_menu():
 
 
 def main():
-    library = []
+    library = load_books()
     option = ''
     dashboard()
     while option != 'q':
